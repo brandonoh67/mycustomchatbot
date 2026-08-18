@@ -644,9 +644,19 @@ body {
   width: 100%;
 }
 
+/* Darker line variable for higher rest contrast */
+:root {
+  --line-strong: #cbd5e1; /* Added for clearer resting visibility */
+}
+
+.chat-shell.dark-theme {
+  --line-strong: #313c4b;
+}
+
+/* Textarea with Thicker Border */
 textarea {
   background: var(--surface-muted);
-  border: 1px solid var(--line);
+  border: 2px solid var(--line); /* Increased from 1px to 2px */
   border-radius: var(--radius-md);
   color: var(--text);
   font-family: inherit;
@@ -657,12 +667,13 @@ textarea {
   padding: 5px 52px 5px 9px;
   resize: none;
   width: 100%;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
 }
 
 textarea:focus {
   border-color: var(--accent);
   background: var(--surface);
-  box-shadow: 0 0 0 2px rgba(34, 119, 187, 0.15);
+  box-shadow: 0 0 0 3px rgba(34, 119, 187, 0.2); /* Enhanced glow ring to match thicker border */
   outline: none;
 }
 
