@@ -193,10 +193,8 @@ document.addEventListener("DOMContentLoaded", () => {
       applyThemePreference();
       applyFontSizePreference();
 
-      // Update in-feed status banner if profile changed via settings
       updateInFeedCategoryStatusDisplay(currentConfig.patientCategory);
 
-      // Rebuild conversation history with new rules
       conversationHistory = initializeFreshHistory();
       if (conversationHistory.length > 0 && conversationHistory[0].role === "system") {
         conversationHistory[0].content = currentConfig.systemPrompt;
@@ -354,7 +352,6 @@ function applyFontSizePreference() {
 /* IN-FEED AGE / PATIENT CATEGORY SELECTOR */
 
 function appendInFeedAgeSelector() {
-  // Remove any existing status line if resetting
   const existingStatus = chatFeed.querySelector(".chat-status-wrapper");
   if (existingStatus) existingStatus.remove();
 
@@ -363,8 +360,8 @@ function appendInFeedAgeSelector() {
   cardDiv.innerHTML = `
     <span class="message-sender">${BRAND_CONFIG.companyName}</span>
     <div class="age-card">
-      <p class="age-card-title">Who is this for?</p>
-      <p class="age-card-subtitle">You can also change this in settings.</p>
+      <p class="age-card-title">Who is this visit for?</p>
+      <p class="age-card-subtitle">This helps me give you the most accurate answers.</p>
       <div class="age-buttons-group">
         <button type="button" class="age-chip-btn" data-category="child">🧒 Child / Teen</button>
         <button type="button" class="age-chip-btn" data-category="adult">👤 Adult</button>
@@ -409,7 +406,6 @@ function setPatientCategory(category, cardDiv) {
 }
 
 function appendCategoryStatus(category) {
-  // Remove existing status wrapper if present
   const existing = chatFeed.querySelector(".chat-status-wrapper");
   if (existing) existing.remove();
 
@@ -428,7 +424,6 @@ function appendCategoryStatus(category) {
     </div>
   `;
 
-  // Insert near the top of the feed right after the welcome message
   chatFeed.insertBefore(container, chatFeed.children[1] || null);
 
   const changeBtn = container.querySelector(".status-change-btn");
