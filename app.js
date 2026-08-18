@@ -5,7 +5,7 @@ const OPENAI_API_KEY = "YOUR_OPENAI_API_KEY_HERE";
 const BRAND_CONFIG = {
   companyName: "Cornerstone Family Dentistry",
   avatarText: "CFD",
-  welcomeMessage: 'Hi! How can I assist today? For emergencies, call <a href="tel:9722711302">(972) 271-1302</a>.',
+  welcomeMessage: "Hi I'm your virtual assistant for " + BRAND_CONFIG.companyName + "! How can I assist you today?",
   sampleQuestions: [
     "How do I schedule an appointment?",
     "What services do you offer?",

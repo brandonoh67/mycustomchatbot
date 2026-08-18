@@ -136,7 +136,7 @@ body {
   bottom: 20px;
   right: 20px;
   width: 345px;
-  height: 495px;
+  height: 510px;
   max-height: calc(100dvh - 40px);
   background: var(--shell-bg);
   border: 1px solid var(--line);
@@ -568,7 +568,7 @@ body {
   flex-shrink: 0;
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 5px;
 }
 
 .sample-questions-container {
@@ -713,6 +713,22 @@ textarea:focus {
 #ask-button:disabled {
   opacity: 0.5;
   cursor: not-allowed;
+}
+
+/* Chat Footer Medical & Legal Disclaimer */
+.chat-disclaimer {
+  font-size: 0.58rem;
+  color: var(--muted);
+  text-align: center;
+  line-height: 1.25;
+  margin-top: 2px;
+  padding: 0 4px;
+}
+
+.chat-disclaimer a {
+  color: var(--accent);
+  font-weight: 600;
+  text-decoration: underline;
 }
 
 /* Overlay Drawers */
