@@ -360,8 +360,8 @@ function appendInFeedAgeSelector() {
   cardDiv.innerHTML = `
     <span class="message-sender">${BRAND_CONFIG.companyName}</span>
     <div class="age-card">
-      <p class="age-card-title">Who is this visit for?</p>
-      <p class="age-card-subtitle">This helps me give you the most accurate answers.</p>
+      <p class="age-card-title">Who is this for?</p>
+      <p class="age-card-subtitle">This helps me give you the most accurate answers. Go to settings to update your profile.</p>
       <div class="age-buttons-group">
         <button type="button" class="age-chip-btn" data-category="child">🧒 Child / Teen</button>
         <button type="button" class="age-chip-btn" data-category="adult">👤 Adult</button>
