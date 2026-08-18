@@ -9,7 +9,7 @@ const BRAND_CONFIG = {
   sampleQuestions: [
     "How do I schedule an appointment?",
     "What services do you offer?",
-    "How to eliminate dental anxiety for my child?",
+    "Do you accept new patients?",
     "What insurance plans do you accept?"
   ]
 };
