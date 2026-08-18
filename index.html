@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Cornerstone Family Dentistry Assistant Widget">
+  <title>Cornerstone Family Dentistry - Assistant</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Floating Launcher Button -->
+  <button id="chat-launcher" class="chat-launcher-btn hidden" aria-label="Open Patient Assistant" title="Chat with CFD Assistant">
+    <svg class="launcher-icon-chat" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+    </svg>
+  </button>
+
+  <!-- Floating Chat Shell Drawer -->
+  <div id="chat-shell" class="chat-shell">
+
+    <!-- Toast Notification Popup -->
+    <div id="toast-notification" class="toast hidden">Settings saved!</div>
+    
+    <!-- App Header -->
+    <header class="app-header">
+      <div class="header-info">
+        <div class="avatar-wrapper">
+          <div id="brand-avatar" class="avatar">CFD</div>
+          <span class="online-indicator"></span>
+        </div>
+        <div class="header-text">
+          <h1 id="brand-h1">Cornerstone Dentistry</h1>
+          <span class="subtitle">Patient Assistant</span>
+        </div>
+      </div>
+      <div class="header-controls">
+        <!-- Chat History Toggle -->
+        <button id="history-toggle-btn" class="icon-btn" aria-label="View Chat History" title="Chat History" type="button">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 8v4l3 3"></path><circle cx="12" cy="12" r="9"></circle></svg>
+        </button>
+        
+        <!-- Settings Toggle -->
+        <button id="settings-toggle-btn" class="icon-btn" aria-label="Open Settings" title="Settings" type="button">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+        </button>
+
+        <!-- Header Close Button -->
+        <button id="close-widget-btn" class="icon-btn" aria-label="Close Chat Assistant" title="Close" type="button">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        </button>
+      </div>
+    </header>
+
+    <!-- Chat Feed -->
+    <main id="chat-feed" class="chat-feed">
+      <div class="chat-divider">
+        <span>Today</span>
+      </div>
+    </main>
+
+    <!-- History Overlay Drawer -->
+    <div id="history-overlay" class="overlay-drawer hidden">
+      <div class="drawer-panel">
+        <div class="drawer-header">
+          <h2>Chat History</h2>
+          <button id="history-close-btn" class="icon-btn" aria-label="Close History" type="button">✕</button>
+        </div>
+        <div class="drawer-actions-bar">
+          <button type="button" id="clear-all-history-btn" class="clear-history-link-btn">Clear All History</button>
+        </div>
+        <div id="history-list" class="drawer-body">
+          <p class="history-empty">No previous saved conversations found.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Settings Overlay Drawer -->
+    <div id="settings-overlay" class="overlay-drawer hidden">
+      <div class="drawer-panel">
+        <div class="drawer-header">
+          <h2>Assistant Settings</h2>
+          <button id="settings-close-btn" class="icon-btn" aria-label="Close Settings" type="button">✕</button>
+        </div>
+        
+        <form id="settings-form" class="drawer-body" autocomplete="off" action="javascript:void(0);">
+          
+          <!-- Appearance & Accessibility Section -->
+          <div class="setting-section-title">Appearance & Accessibility</div>
+          
+          <div class="setting-group">
+            <label for="setting-theme">Color Theme</label>
+            <select id="setting-theme">
+              <option value="light">Light Mode</option>
+              <option value="dark">Dark Mode</option>
+            </select>
+          </div>
+
+          <div class="setting-group">
+            <label for="setting-font-size">Chat Font Size</label>
+            <select id="setting-font-size">
+              <option value="normal">Normal Text</option>
+              <option value="large">Large Text (Easier Reading)</option>
+            </select>
+          </div>
+
+          <div class="setting-group">
+            <label for="setting-patient-category">Patient Profile</label>
+            <select id="setting-patient-category">
+              <option value="">General / Not Specified</option>
+              <option value="child">Child / Teen</option>
+              <option value="adult">Adult</option>
+              <option value="senior">Senior (65+)</option>
+            </select>
+          </div>
+
+          <hr class="setting-divider">
+
+          <!-- Patient Contact Info Section -->
+          <div class="setting-section-title">Patient Contact Info</div>
+
+          <div class="setting-group">
+            <label for="setting-patient-name">Your Name</label>
+            <input type="text" id="setting-patient-name" placeholder="e.g. Jane Doe" />
+          </div>
+
+          <div class="setting-group">
+            <label for="setting-patient-contact">Phone or Email</label>
+            <input type="text" id="setting-patient-contact" placeholder="e.g. (555) 000-0000" />
+          </div>
+
+          <hr class="setting-divider">
+
+          <!-- Assistant Behavior Section -->
+          <div class="setting-section-title">Assistant Behavior</div>
+
+          <div class="setting-group">
+            <label for="setting-creativity">Response Style</label>
+            <select id="setting-creativity">
+              <option value="0.2">Focused & Precise (Recommended for Medical/Dental)</option>
+              <option value="0.7">Balanced & Natural</option>
+              <option value="1.0">Creative & Diverse</option>
+            </select>
+          </div>
+
+          <div class="setting-group">
+            <label for="setting-system-prompt">System Instructions</label>
+            <textarea id="setting-system-prompt" rows="4" placeholder="Define how the bot should behave..."></textarea>
+          </div>
+
+          <div class="settings-actions">
+            <button type="submit" id="save-settings-btn" class="primary-btn">Save Settings</button>
+            <button type="button" id="clear-chat-btn" class="danger-btn">Clear Chat History</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Input Footer -->
+    <footer class="input-container">
+      <div id="sample-questions" class="sample-questions-container"></div>
+
+      <div id="file-preview-bar" class="file-preview-bar hidden">
+        <div class="file-chip">
+          <span class="file-icon">📄</span>
+          <span id="file-name" class="file-name">document.pdf</span>
+          <button type="button" id="remove-file-btn" class="remove-file-btn" aria-label="Remove attached file">✕</button>
+        </div>
+      </div>
+
+      <form id="question-form" class="question-form" autocomplete="off" action="javascript:void(0);">
+        <label for="question-input" class="sr-only">Question</label>
+        <div class="textarea-wrapper">
+          <textarea 
+            id="question-input" 
+            name="chat_message_prompt_no_autofill" 
+            placeholder="Type your message here..." 
+            rows="1"
+            enterkeyhint="send"
+            autocomplete="one-time-code"
+            autocorrect="off"
+            autocapitalize="off"
+            spellcheck="false"
+            required
+          ></textarea>
+
+          <div class="input-actions-right">
+            <input type="file" id="file-upload-input" accept=".txt,.pdf,.csv,.json,.md,.doc,.docx" class="sr-only" />
+            
+            <button type="button" id="attach-file-btn" class="input-action-btn" title="Attach Patient Forms or Docs" aria-label="Attach Document">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48"></path></svg>
+            </button>
+
+            <button id="ask-button" type="submit" title="Send Message" aria-label="Send message">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+            </button>
+          </div>
+        </div>
+      </form>
+    </footer>
+
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
