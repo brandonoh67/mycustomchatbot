@@ -5,11 +5,11 @@ const OPENAI_API_KEY = "YOUR_OPENAI_API_KEY_HERE";
 const BRAND_CONFIG = {
   companyName: "Cornerstone Family Dentistry",
   avatarText: "CFD",
-  welcomeMessage: "Hi, I'm your virtual assistant for Cornerstone Family Dentistry! How can I assist you today?",
+  welcomeMessage: "Hi! How can I assist you today?",
   sampleQuestions: [
     "How do I schedule an appointment?",
     "What services do you offer?",
-    "Do you accept new patients?",
+    "Do you take walk-in appointments?",
     "What insurance plans do you accept?"
   ]
 };
@@ -46,7 +46,7 @@ SOURCE & KNOWLEDGE GUIDELINES:
 4. MEDICAL & SAFETY BOUNDARIES:
    - Online answers cannot replace a professional clinical examination.
    - For severe dental pain, bleeding, or acute trauma, IMMEDIATELY advise the user to contact Cornerstone Family Dentistry at <a href="tel:9722711302">(972) 271-1302</a>.`,
-  temperature: 0.2
+  temperature: 0.7 // Default set to Warm & Professional
 };
 
 // STATE MANAGEMENT
@@ -361,7 +361,7 @@ function appendInFeedAgeSelector() {
     <span class="message-sender">${BRAND_CONFIG.companyName}</span>
     <div class="age-card">
       <p class="age-card-title">Who is this for?</p>
-      <p class="age-card-subtitle">This helps me give you the most accurate answers. Go to settings to update your profile.</p>
+      <p class="age-card-subtitle">This helps me give you the most accurate answers. You can update your profile in Settings.</p>
       <div class="age-buttons-group">
         <button type="button" class="age-chip-btn" data-category="child">🧒 Child / Teen</button>
         <button type="button" class="age-chip-btn" data-category="adult">👤 Adult</button>
@@ -746,7 +746,7 @@ function syncSettingsUI() {
   if (settingPatientCategory) settingPatientCategory.value = currentConfig.patientCategory || "";
   if (settingPatientName) settingPatientName.value = currentConfig.patientName || "";
   if (settingPatientContact) settingPatientContact.value = currentConfig.patientContact || "";
-  if (settingCreativity) settingCreativity.value = (currentConfig.temperature ?? 0.2).toString();
+  if (settingCreativity) settingCreativity.value = (currentConfig.temperature ?? 0.7).toString();
   if (settingSystemPrompt) settingSystemPrompt.value = currentConfig.systemPrompt || DEFAULT_CONFIG.systemPrompt;
 }
 
